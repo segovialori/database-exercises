@@ -50,7 +50,7 @@ select *
 from employees
 where last_name like 'e%' and last_name like '%e'
 order by emp_no;
-#7330 emloyees returned, first:  10021/Ramzi/Erde, last:  499648/Tadahiro/Erde
+#899 emloyees returned, first:  10021/Ramzi/Erde, last:  499648/Tadahiro/Erde
 
 #6 Write a query to to find all employees whose last name starts and ends with 'E'. Sort the results by their hire date, so that the newest employees are listed first. Enter a comment with the number of employees returned, the name of the newest employee, and the name of the oldest emmployee.
 
