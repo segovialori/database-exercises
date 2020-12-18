@@ -51,15 +51,16 @@ limit 10 offset 20;
 #SELECT DISTINCT title FROM titles;
 #List the first 10 distinct last name sorted in descending order.
 
-select distinct last_name from employees limit 10;
-#facello, simmel, bamford, koblick, maliniak, preusig, zielinski, kalloufi, peac, piveteau
+select distinct last_name from employees order by last_name desc limit 10;
+#Zykh, Zyda, Zwicker, Zweizig, Zumaque, Zultner, Zucker, Zuberek, Zschoche, Zongker
 
 #Find all previous or current employees hired in the 90s and born on Christmas. Find the first 5 employees hired in the 90's by sorting by hire date and limiting your results to the first 5 records. Write a comment in your code that lists the five names of the employees returned.
 select *
 from employees
 where hire_date like '199%' and birth_date like '%-12-25'
+order by hire_date
 limit 5;
-# mang, evgueni, florina, sorina, chriss 
+# alselm, utz, bouchung,baocai, petter 
 
 #Try to think of your results as batches, sets, or pages. The first five results are your first page. The five after that would be your second page, etc. Update the query to find the tenth page of results.
 select *
@@ -79,4 +80,4 @@ limit 5 offset 45;
 
 #LIMIT and OFFSET can be used to create multiple pages of data. What is the relationship between OFFSET (number of results to skip), LIMIT (number of results per page), and the page number?
 
-#Limit limits the number of results returned to a number or page specified.  Limit and offset are used for creating pages of data.  
+#Limit limits the number of results returned to a number or page specified.  Limit and offset are used for creating pages of data.  The relationship between LIMIT & OFFSET can be viewed as a function: OFFSET = LIMIT*p-LIMIT. offeset_number = (page_number - 1) * limit_number  
