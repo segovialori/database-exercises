@@ -88,6 +88,37 @@ where salary > (
 	   
 	   
 #6.  How many current salaries are within 1 standard deviation of the current highest salary? (Hint: you can use a built in function to calculate the standard deviation.) What percentage of all salaries is this?
+SELECT COUNT(*), (COUNT(*)/(SELECT COUNT(*) FROM salaries AS s WHERE s.to_date>NOW()) * 100) AS Percent
+FROM salaries AS s
+WHERE s.to_date='9999-01-01' AND s.salary >
 
+				(SELECT MAX(s.salary) - STD(s.salary)
+				FROM salaries AS s);
 
-
+#7.  Find all the department names that currently have female managers.
+SELECT d.dept_name
+FROM departments AS d
+JOIN dept_manager AS dm 
+ON d.dept_no=dm.dept_no
+JOIN employees AS e
+ON e.emp_no=dm.emp_no
+WHERE e.gender='F' AND dm.emp_no IN (SELECT dm.emp_no
+FROM dept_manager AS dm
+WHERE dm.to_date='9999-01-01');
+#8.  Find the first and last name of the employee with the highest salary.
+SELECT e.first_name, e.last_name
+FROM employees AS e
+JOIN salaries AS s ON e.emp_no=s.emp_no
+WHERE s.salary =
+(SELECT MAX(s.salary)
+FROM salaries AS s);
+#9.  Find the department name that the employee with the highest salary works in.
+SELECT d.dept_name
+FROM departments AS d
+JOIN dept_emp AS de
+ON d.dept_no=de.dept_no
+JOIN salaries AS s
+ON de.emp_no=s.emp_no
+WHERE s.salary=
+		(SELECT MAX(s.salary)
+		FROM salaries AS s);
